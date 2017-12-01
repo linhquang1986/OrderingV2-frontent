@@ -1,0 +1,77 @@
+"use strict"
+var recognition = null;
+var inAction = null;
+var saveDrink = null;
+var saveEntities = null;
+function sendWitAi(msg) {
+    let entities = {
+        _abort: null,
+        _quanlity: null,
+        _drink: null,
+        _menu: null
+    }
+    let data = { message: msg }
+    postWit('/wit/message', data, (res) => {
+        console.log(res)
+        if (res.entities.abort) {
+            entities._abort = true;
+        }
+        if (res.entities.quanlity) {
+            entities._quanlity = res.entities.quanlity[0].value;
+            if (saveEntities) {
+                saveEntities._quanlity = entities._quanlity;
+                handleOrder(saveEntities);
+                saveEntities = null;
+            }
+        }
+        if (res.entities.drinks) {
+            entities._drink = res.entities.drinks[0].value;
+        }
+        if (res.entities.menus) {
+            entities._menu = res.entities.menus[0].value;
+        }
+        if (res.entities.have && res.entities.y_n) {
+            if (entities._drink)
+                quesDrink(entities)
+            if (entities._menu)
+                handleMenu(entities._menu)
+            if (!entities._drink && !entities._menu)
+                speak('Hiện bên mình chưa có bạn vui lòng chọn nước khác nha.');
+        }
+        if (!res.entities.have || !res.entities.y_n && !res.entities.listed) {
+            if (entities._drink)
+                handleOrder(entities)
+            if (entities._menu)
+                handleMenu(entities._menu)
+        }
+        if (res.entities.have && res.entities.listed) {
+
+        }
+    })
+}
+var quesDrink = (entities) => {
+    speak('Có bạn');
+    saveEntities = entities;
+}
+var handleOrder = (entities) => {
+    let drinkOder = {
+        name: entities._drink,
+        quanlity: entities._quanlity
+    }
+    if (!entities._abort) {
+        addBill(drinkOder)
+    } else {
+        updateBill(entities._drink)
+    }
+}
+
+var handleMenu = (menu) => {
+    let exist = menuDrink.find(m => {
+        return m.name.toLowerCase() == menu.toLowerCase();
+    })
+    if (exist) {
+        speak('Bạn muốn dùng loại ' + menu + ' nào?')
+    } else {
+        speak('Hiện bên mình chưa có bạn vui lòng chọn nước khác nha.')
+    }
+}

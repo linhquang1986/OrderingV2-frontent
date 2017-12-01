@@ -1,0 +1,95 @@
+.stop-button {  
+  display:none;  
+}
+
+.processing-button {
+  display:none;  
+}
+.menucontai{
+  padding-top: 10%
+}
+.panel{
+  padding: 10px;
+  border: none;
+}
+.panel .menu-heading{
+  font-size: 30px;
+  font-weight: bold;
+}
+.message-success{
+  position: absolute;
+  z-index: 1;
+  width: 400px;
+  right: 0;
+  top: 0;
+}
+.message-error{
+  position: absolute;
+  z-index: 1;
+  width: 400px;
+  right: 0;
+  top: 0;
+}
+.orders{
+  width:350px !important; 
+  position: absolute;
+  z-index: 1;
+  width: 400px;
+  right: 0;
+  top: 0;
+}
+.orders .panel-heading{
+  height: auto !important;
+  padding-top: inherit !important;
+}
+.quanlity{
+  position: absolute;
+}
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+  background-color: #3c763d;
+   -webkit-animation: flickerAnimation .5s infinite;
+   -moz-animation: flickerAnimation .5s infinite;
+   -o-animation: flickerAnimation .5s infinite;
+    animation: flickerAnimation .5s infinite;
+}
+.chatbox-heading{
+  font-size: 20px;
+  height: 50px;
+  padding: 10px 0 0 0;
+}
+.microphone{
+  color: darkgray;
+  border: 5px solid;
+  font-size: 22px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 25px;
+  padding: 8px;
+  cursor: pointer
+}
+.microphone-start{
+  color:darkseagreen;
+}
+
+

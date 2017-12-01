@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "recognitionvietnamese",
+  "private_key_id": "bd66e0db8b631d25148d9ec3f871eb1cf6eaeb1a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCOWmJUH86CR+/2\ntva+d8W9wMYXy3NSKqcVFXm9HlQ3w8Dft29UQYDX16aYVrKkEZs/yqCzgae53JLP\nQSmSAqPsoEwE8IPBs0yspWrTUwbTjLn0HTxN1RJonFPpGdYoojbe0Tca9ztDiOlj\n1MEUPa6b8dvVJgMQmKJ6s35BC38/56lrjkX9xJezisr7BNg+gL3aT/DigwG8cRA+\nkMr+LePtpLp+rlsjc3vedssdGf7yeO/dP468haoqHsMavda2eLwZTCKgFSE54D/9\n25glQeQ9w71hkNxRfx08vv8iGLOKC91J738DP6cCZKftP+bybh95df7KlOgOcWpe\nqRFMkaEHAgMBAAECggEAC8eA4XMsVG19ds3XBxXEIBqGicuFBGSRJNZ9F2AeGesx\n15FHPhKZhcLLf0mVSKxIS3QJ7jCpX2DYKRw8Q1/Cjr8I61O3o1yh2JtrhocVRoYb\nkQ6mQc6C0nM1IlHH/d7GaZOoWqvglIsMvP0K6RDdlPvjc/TMRiBLOZoGtX0tD22N\naHxPEa5/WWc8dZx1UQJFveW+Go2YsMcOfizMhJTatlZBbab8WTFhZbvQw65Owk+z\nFEWj8npAFw/bYnl8SsujM+g79e2L3pJGMkoIH6n8/nhFOnl+pm69R13uFitMLpRY\nO1j5Ixc0dKwG4bwZxEzb+XMXG50U2d8Z2uiCh9MTKQKBgQC/gUAjtlI1Eh46CwEm\nhrAsVHQXDd0+BDTBXz1mw2swaxtYwCdhNllXdUoMvao1NtHH+DrnXaXm8QyM4OWv\nWuxRhSxv1l9BUqM1316KNXvYQxoNwNS4FRk25AcBFtf0j6ERkT81lzyPnA7hk7zq\nPnpkd2O+gMDP9nBYUwIsM9jArQKBgQC+S3gfEcstz7S0NTkKcaNnXA7tmJ197liS\naejolAKaz9y2S49tGenqrA5dz/kjQRVpUu2DKGN9G1VpnjYO5DbU0HroQ9tFiHD6\nOy3esoqtZzmV0Wrw1OdCQJYfvp5vHGGBSqQVrkYNKWqE+uk2XsMkZ8AuIMACbaOF\nOoK20Y27AwKBgEmc/XK82szbshLNuBt/GqlvrVBPXARCyaSrX4bpB4MNKO3srzaH\nFcCwrU5Iee0KrYkYukvFi8hCUHi22pOVd9G+R16WIPeTNHm46zZlaL2wzYsL3LkG\nIzMeZDLe/RRdQaTnGE0ZXYY2juHXUH8alSGZYxYPmA5YxMau4d7r7x3hAoGAS5cM\n+0KFNAhq3p65rtVfNGKUJ3tVLD3ufxKFC0YoFrj1EpDHQ25kxexctJU1gPSMfc8M\nO+piQsMF1bOcA6RRx42dFQBHbMJ7Jls1qF3ByonTjRin40yfJGkleSyuILLkZIhy\nz43vk7Dc+D/3Pbq8x4xTAb/OpehJaVXJsLdjFmMCgYBPP7trllLo6sRfWbubG0kj\nGT4obkdXH2hu/VjprCa/TxA/JJeaLl7FQhRQ6OeSeqF6Rxa7C7dmGzZXi5XBP6JT\ncVoJbvYAeykFikY3Jy451z2dFyzbN+X8J2XASzo1W5ikBhRU8LytHkZN5bo9Q7am\nbIypdO+dNyaB44BKSeOXwQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "linhquang1986@recognitionvietnamese.iam.gserviceaccount.com",
+  "client_id": "112827078218889020366",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/linhquang1986%40recognitionvietnamese.iam.gserviceaccount.com"
+}

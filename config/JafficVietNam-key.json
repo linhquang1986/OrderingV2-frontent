@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "jafficvietnam",
+  "private_key_id": "0843771ef291296ed721ea612a6883691500fe22",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDWomi/QpKmB9jJ\n7ZDILaSHiTI7yGXhQQeQiEzmDtGqahbDUidiOF2Mu1dn28+t3iczbgenbgSIopFu\n1ndq0MuJE/cThh/ps6kTYyunZHT5z4WBW1yZUWab4CUgH6bbcYL0EXQzCkwYXbj6\nIrhJ1kdeFcAKgJodRwIflh+mv7Sl763M6Hg3y69v13dn/SVy8CQJZ7hqN/ca6isz\nbd7HDE9SrYoq7a2bFOD+z4wBExOeEVHswF9reV6FBR49RSlT1LWYaRrYF8W8F33U\nyHgJkm7HnF7ICiEDyAJNIP943V74LY8QU4kwxEy1kCiQlGCcDTOxP6chnyk1bpuB\nLpNEPjOZAgMBAAECggEAD9xilzepNKHB0HJAz7onvWhTEP3nIXU3xON9o0aXEdvT\nIM3yYRy/NQYnGGKy/ys6hF9uK15C8YHp82Hf40HYuKGEEapIs3F2Xhtm/3C6ADfo\nqr2Ao0fTqFMxCyWro+3IepbLmnX5V5edcsacDcDK91XuIhiMyvsTWhgy8JScGeLw\no9mixvpCOLw1gQLpp7OL3gd8tbf1UW8a+jW3IEjjtRQPQBkHNrHYn1dIEf782epf\naGRpGqnQFCQbKUVrgQvhGmkJsIV1ygjf9OZv7JJKtK7ZvZ+PLyXU8G7lebaun2ir\nup8Ay8sBwsw+iz80nlpW+PSEHHHbIBchqGMf3adUsQKBgQD5dCTcR4rmgC9/v4Zf\nTB8ILIzaWEo0Z2cX2vgfRk+nw0WnnLEM+N94IF72NIrqNyfB6vZR7b39n2VSW9i9\nmECMyGJY9lBhwzSsWTIJVTMMwGYHo1r0uwOd05MieJi0NakrVr/CCbFquZS7p+7F\nB8VpAjWRcv/nBakfE81CqxDTJQKBgQDcRFh7ZbSkny5Fgkb0G3D6y3+KHigrLy56\nZ843tMAJuPdGt3PnATHMZN4JOuZrN7JcHHCxgt0d34kahBhiuM9NN7rYbGwV0bwS\nkKhp/+XX9a+vITuGoxqMol7gMXjtds5wV80Ax9SwurMzbJkj0n+luBr/D2j+h2Y+\n+g0zlw1uZQKBgGsIgqhhqh+s8LSHoUhSiR4gv28QYwaJN5rswXnp2VPKXaDFgtJm\nFrycZyKM+O32LIDwKDCPKe4g7oCgGCeBpHDDqi8xwNuxvnAU9Xs7q2PVSfINDYHk\nnHCjz4YC6MKqI6QM3MqNDisU5dR/AdxYsUOVRxbZmSOvMhm7jV8Ft3phAoGBAIoC\nzMnsbOYk0tI8kYaL1xtc/DmnMZX1RxLtDbm7qAOvgEgv1BAuoGwn2zM/U3ZkfH3Y\nWAfxLeh00ivqDnl0wHbqb0kBjiuRsVyUhOF9tB6/UufRU8HFWnI5nmasuM9Y/HpJ\nmSpfCvX81SFobv+R+eb01v1vQ2MPpVHaTQFBKOo9AoGAGzmRBLMY3AJvHNwIJq2N\nXk2Mn8Uaj2yWsWitCgbk3hbrqy6+KA9Xf+sIhJrSbhVx4z5Zhj7YMHiAbD4wO2pq\nM5ATwsXIwPLWq7ZNwut3Yi3rsiMnBi2oniPdrqnRQIrTahqA5suyHkLtHXo8idsw\n440IqPI1hyQyNCURMdJqOUM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "linhquang1986@jafficvietnam.iam.gserviceaccount.com",
+  "client_id": "111326863185972819787",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/linhquang1986%40jafficvietnam.iam.gserviceaccount.com"
+}
