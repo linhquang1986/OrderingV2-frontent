@@ -16,14 +16,6 @@ function sendWitAi(msg) {
         if (res.entities.abort) {
             entities._abort = true;
         }
-        if (res.entities.quanlity) {
-            entities._quanlity = res.entities.quanlity[0].value;
-            if (saveEntities) {
-                saveEntities._quanlity = entities._quanlity;
-                handleOrder(saveEntities);
-                saveEntities = null;
-            }
-        }
         if (res.entities.drinks) {
             entities._drink = res.entities.drinks[0].value;
         }
@@ -39,13 +31,22 @@ function sendWitAi(msg) {
                 speak('Hiện bên mình chưa có bạn vui lòng chọn nước khác nha.');
         }
         if (!res.entities.have || !res.entities.y_n && !res.entities.listed) {
-            if (entities._drink)
+            if (entities._drink && !saveEntities) {
                 handleOrder(entities)
-            if (entities._menu)
+            }
+            if (entities._menu && !saveEntities)
                 handleMenu(entities._menu)
         }
         if (res.entities.have && res.entities.listed) {
 
+        }
+        if (res.entities.quanlity) {
+            entities._quanlity = res.entities.quanlity[0].value;
+            if (saveEntities) {
+                saveEntities._quanlity = entities._quanlity;
+                handleOrder(saveEntities);
+                saveEntities = null;
+            }
         }
     })
 }
