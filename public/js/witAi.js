@@ -48,6 +48,10 @@ function sendWitAi(msg) {
         if (res.entities.have && res.entities.listed) {
             //show list drink in menu
         }
+        if (res.entities.Billing && billData.length > 0) {
+            speak('Bạn có muốn ghi chú gì không?')
+            noteBill = true;
+        }
     })
 }
 var quesDrink = (entities) => {

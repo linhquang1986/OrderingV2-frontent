@@ -3,6 +3,7 @@
 var menuDrink = null;
 var drinksData = null;
 var billData = [];
+var noteBill = false;
 function speak(msg) {
     responsiveVoice.speak(msg, "Vietnamese Male");
     botChat(msg);
@@ -32,7 +33,6 @@ function updateBill(_drink) {
     }
 }
 function addBill(drinkObj) {
-    console.log(drinkObj)
     drinkObj.quanlity = drinkObj.quanlity || 1;
     speak(drinkObj.quanlity + ' ' + drinkObj.name);
     drinksData.forEach(drink => {
@@ -56,7 +56,10 @@ function addBill(drinkObj) {
         }
     })
 }
-
+function addNoteBill(text) {
+    let noteBill = $('.orders').find('.notebill');
+    noteBill.append(`<li class="list-group-item"> - ${text}</li>`)
+}
 function renderBill(data) {
     let bill = $('.orders').find('.ordersDrinks');
     bill.empty();
@@ -91,8 +94,12 @@ function getAllDrink(callback) {
 $('#btn-chat').on('click', (e) => {
     let msg = $('#btn-input').val();
     if (msg != '') {
-        userChat(msg);
-        sendWitAi(msg);
+        if (!noteBill) {
+            userChat(msg);
+            sendWitAi(msg)
+        } else {
+            addNoteBill(msg)
+        }
         $('#btn-input').val('');
     }
 })
@@ -100,8 +107,12 @@ $('#btn-input').on("keypress", function (e) {
     if (e.which === 13) {
         let msg = $('#btn-input').val();
         if (msg != '') {
-            userChat(msg);
-            sendWitAi(msg);
+            if (!noteBill) {
+                userChat(msg);
+                sendWitAi(msg)
+            } else {
+                addNoteBill(msg)
+            }
             $('#btn-input').val('');
         }
     }

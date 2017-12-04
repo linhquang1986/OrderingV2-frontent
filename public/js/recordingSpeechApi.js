@@ -40,8 +40,12 @@ function start() {
 
     recognition.onresult = function (event) {
       let text = event.results[0][0].transcript;
-      userChat(text);
-      sendWitAi(text)
+      if (!noteBill) {
+        userChat(text);
+        sendWitAi(text)
+      } else {
+        addNoteBill(msg)
+      }
       // if (text == 'Doraemon' || text == 'doraemon') {
       //   isListen = true;
       //   responsiveVoice.speak("Bạn muốn tôi giúp gì", "Vietnamese Male", {
