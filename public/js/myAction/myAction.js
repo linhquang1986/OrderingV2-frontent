@@ -32,6 +32,7 @@ function updateBill(_drink) {
     }
 }
 function addBill(drinkObj) {
+    console.log(drinkObj)
     drinkObj.quanlity = drinkObj.quanlity || 1;
     speak(drinkObj.quanlity + ' ' + drinkObj.name);
     drinksData.forEach(drink => {

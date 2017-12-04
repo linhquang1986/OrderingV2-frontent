@@ -16,6 +16,14 @@ function sendWitAi(msg) {
         if (res.entities.abort) {
             entities._abort = true;
         }
+        if (res.entities.quanlity) {
+            entities._quanlity = res.entities.quanlity[0].value;
+            if (saveEntities) {
+                saveEntities._quanlity = entities._quanlity;
+                handleOrder(saveEntities);
+                saveEntities = null;
+            }
+        }
         if (res.entities.drinks) {
             entities._drink = res.entities.drinks[0].value;
         }
@@ -38,15 +46,7 @@ function sendWitAi(msg) {
                 handleMenu(entities._menu)
         }
         if (res.entities.have && res.entities.listed) {
-
-        }
-        if (res.entities.quanlity) {
-            entities._quanlity = res.entities.quanlity[0].value;
-            if (saveEntities) {
-                saveEntities._quanlity = entities._quanlity;
-                handleOrder(saveEntities);
-                saveEntities = null;
-            }
+            //show list drink in menu
         }
     })
 }
