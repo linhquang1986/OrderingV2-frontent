@@ -4,6 +4,7 @@ var menuDrink = null;
 var drinksData = null;
 var billData = [];
 var noteBill = false;
+
 function speak(msg) {
     responsiveVoice.speak(msg, "Vietnamese Male");
     botChat(msg);
@@ -15,7 +16,7 @@ function _startorder() {
         menuDrink = data;
         renderMenu(data)
     })
-    speak('Chào bạn, mình là nhân viên order. Bạn muốn dùng gì?')
+    speak(dic.welcome)
 }
 _startorder();
 
@@ -29,12 +30,12 @@ function updateBill(_drink) {
     if (dr) {
         let drinkInBill = $('.ordersDrinks').find(`[drinkId=${dr._id}]`);
         drinkInBill.remove();
-        billData.filter(drink => drink.name.toLowerCase() !== _drink.name.toLowerCase())
+        //billData.filter(drink => drink.name.toLowerCase() !== _drink.name.toLowerCase())
     }
 }
 function addBill(drinkObj) {
     drinkObj.quanlity = drinkObj.quanlity || 1;
-    speak(drinkObj.quanlity + ' ' + drinkObj.name);
+    speak(drinkObj.quanlity + ' ' + drinkObj.name + ', ' + dic.confirm);
     drinksData.forEach(drink => {
         if (drinkObj.name.replace(/\s/g, '').toLowerCase() == drink.name.replace(/\s/g, '').toLowerCase()) {
             drinkObj.price = drink.price;

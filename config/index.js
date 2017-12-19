@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-
+"use strict";
 var convict = require('convict')
 var schema = require('./schema')
 var request = require('request')
