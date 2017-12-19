@@ -37,6 +37,11 @@ var renderDrink = () => {
             let drinkIntent = '<li class="list-group-item drink-item" drinkId="' + drink._id + '">' + drink.name + '<span class="badge">' + drink.price + ' Đ</span></li>';
             drinkContent.append(drinkIntent);
         })
+        $('.drink-item').click(e => {
+            let id = e.currentTarget.attributes[1].value;
+            let _d = drinksData.find(d => { return d._id === id });
+            addBill(Object.assign({}, _d));
+        })
     })
 }
 

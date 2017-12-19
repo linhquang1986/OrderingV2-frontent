@@ -24,6 +24,9 @@ function sendWitAi(msg) {
         if(entities._add) {
             type_action = "add"
         }
+        if(entities._special && entities.question){
+            type_action = "list_special"
+        }
         else if (entities._remove) {
              type_action = "xoa"
         }
@@ -35,13 +38,24 @@ function sendWitAi(msg) {
             case "add":
                 handleOrder(entities);
                 break;
-            case "xoa":
-                changeOrder(entities)
-                break;
+            // case "xoa":
+            //     changeOrder(entities)
+            //     break;
             case "no": // tu choi 1 hanh dong
-                console.log('du roi', type_action);
-                showBillAndNote()//show bill and hoi chu thich gi them khong?
-                break;    
+                if(userSubmit){
+                    Order();                   
+                }
+                //console.log('du roi', type_action);
+                //showBillAndNote()//show bill and hoi chu thich gi them khong?
+                break;  
+            case "có":
+                if(userSubmit){
+                    noteBill = true;                  
+                }
+                break;
+            case "list_special":
+                showListSpecial();
+                break;
         }
   
         
