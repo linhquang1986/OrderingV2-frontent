@@ -1,4 +1,4 @@
-#build app angular
+# build app angular
 cd /src 
 run npm run build
 
