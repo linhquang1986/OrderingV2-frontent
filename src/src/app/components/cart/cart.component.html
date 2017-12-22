@@ -1,0 +1,17 @@
+<div class="panel panel-default text-center" [hidden]="cart.length == 0">
+    <div class="panel-heading">Bill</div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of cart">{{item.quanlity + ' ' + item.drink.name + ' ' + item.price + 'VND'}}
+                <span class="remove_drink glyphicon glyphicon-remove" (click)="removeDrink(item.drink._id)"></span>
+            </li>
+        </ul>
+    </div>
+    <button class="btn btn-success" (click)="submit()">Submit</button>
+    <div class="panel-footer">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let str of noteText">{{str}}
+            </li>
+        </ul>
+    </div>
+</div>

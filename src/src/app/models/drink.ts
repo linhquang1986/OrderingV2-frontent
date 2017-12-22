@@ -1,7 +1,8 @@
-export class Menu {
+export class Drink {
     _id: string;
     name: string;
     best: boolean;
     expressions: Array<string>;
-    drinks: Array<{}>
+    menu: string;
+    price: number
 }

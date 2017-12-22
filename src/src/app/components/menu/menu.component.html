@@ -1,0 +1,8 @@
+<div class="panel panel-info col-md-4 menus" *ngFor="let menu of menus">
+    <div class="panel-heading">{{menu.name}}</div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <drink *ngFor="let drink of menu.drinks" [data]="drink">Loading...</drink>
+        </ul>
+    </div>
+</div>
