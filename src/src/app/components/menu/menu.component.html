@@ -2,7 +2,7 @@
     <div class="panel-heading">{{menu.name}}</div>
     <div class="panel-body">
         <ul class="list-group">
-            <drink *ngFor="let drink of menu.drinks" [data]="drink">Loading...</drink>
+            <li class ='list-group-item drink-item' *ngFor="let drink of menu.drinks" [drink]="drink"></li>
         </ul>
     </div>
 </div>

@@ -5,6 +5,7 @@ import { HandleResultWitAi } from '../../shared/witResult.service';
 import { AppState } from '../../reduxStore/initStore';
 import { NgRedux } from 'ng2-redux';
 import { Broadcaster } from '../../shared/myEmittor.service';
+import { WebsocketService } from '../../shared/webSocket.service';
 
 const { webkitSpeechRecognition }: IWindow = <IWindow>window;
 
@@ -15,11 +16,13 @@ const { webkitSpeechRecognition }: IWindow = <IWindow>window;
 })
 export class HomeComponent implements OnInit {
   recognition = null;
+  connectGoogle;
   constructor(
     private witService: WitService,
     private handleRsWit: HandleResultWitAi,
     private ngRedux: NgRedux<AppState>,
-    private broadcaster: Broadcaster
+    private broadcaster: Broadcaster,
+    private webSocket: WebsocketService
   ) {
     // Do stuff
   }
@@ -60,7 +63,8 @@ export class HomeComponent implements OnInit {
       };
       this.recognition.onend = () => {
         console.log('end')
-        this.start();
+        if (!this.connectGoogle)
+          this.start();
         // if (!isListen)
         //   this.start();
       }
@@ -93,8 +97,17 @@ export class HomeComponent implements OnInit {
     this.ngRedux.dispatch({ type: 'addNoteText', data: text });
   }
 
+  connect() {
+    if (!this.connectGoogle) {
+      this.connectGoogle = true;
+      this.recognition.abort()
+      this.webSocket.connect();
+    }
+  }
+
   ngOnInit() {
     this.start();
+    this.connectGoogle = false;
     this.broadcaster.on<any>('userChat').subscribe(value => {
       this.sendWitAi(value);
     })

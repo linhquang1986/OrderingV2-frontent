@@ -2,9 +2,9 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+import { AppComponent } from './app.component';
 
 import { AppConfigModule } from './app-config.module';
 
@@ -14,6 +14,7 @@ import { AppState, INIT_STORE } from './reduxStore/initStore';
 
 import * as Services from './shared';
 import Components from './components';
+import { Directives } from './directives';
 
 @NgModule({
   imports: [
@@ -22,17 +23,19 @@ import Components from './components';
     FormsModule,
     routing,
     AppConfigModule,
-    NgReduxModule
+    NgReduxModule,
+    Directives
   ],
   declarations: [
     AppComponent,
-    Components.list    
+    Components.list
   ],
   providers: [
     Services.MenuService,
     Services.WitService,
     Services.HandleResultWitAi,
-    Services.Broadcaster
+    Services.Broadcaster,
+    Services.WebsocketService    
   ],
   bootstrap: [AppComponent]
 })
@@ -56,7 +59,7 @@ export class AppModule {
     // remove styles
     removeNgStyles();
   }
-  
+
   hmrAfterDestroy(store) {
     // display new elements
     store.disposeOldHosts();
