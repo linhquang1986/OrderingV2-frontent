@@ -25,6 +25,7 @@ export class HandleResultWitAi {
     }
 
     checkEntities(entities) {
+        console.log(entities);
         let type_action = null;
         // kiem tra va gan du lieu vao entities
         if (entities.drinks) {
@@ -103,8 +104,10 @@ export class HandleResultWitAi {
             let exist = _.find(drinks, d => {
                 return d.name.toLowerCase() === drinkOder.name.toLowerCase();
             })
-            if (exist)
-                this.ngRedux.dispatch({ type: 'addCart', data: _.clone(exist) })
+            if (exist) {
+
+                this.ngRedux.dispatch({ type: 'addCart', data: _.merge(drinkOder, _.clone(exist)) })
+            }
             else
                 this.speak(message.outofdrink);
         }

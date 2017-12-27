@@ -11,13 +11,13 @@ function addCart(state, value, cb) {
         let _c = new CartItem();
         _c.drink = value;
         _c.price = parseInt(value.price);
-        _c.quanlity = 1;
+        _c.quanlity = parseInt(value.quanlity ? value.quanlity : 1);
         state.cart.push(_c);
         cb(state)
     } else {
         _.find(state.cart, c => {
             if (c.drink._id === value._id) {
-                c.quanlity += 1;
+                c.quanlity += parseInt(value.quanlity ? value.quanlity : 1);
                 c.price = c.drink.price * c.quanlity;
             }
         })
@@ -58,7 +58,7 @@ export function rootReducer(state: AppState, action): AppState {
             addCart(state, action.data, (state) => {
                 return state;
             })
-            
+
         case 'removeDrink':
             _.remove(state.cart, d => {
                 return d.drink._id === action.id;
