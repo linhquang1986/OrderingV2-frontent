@@ -9,7 +9,7 @@ export class WebsocketService {
     constructor() { 
     }
 
-    connect() {
+    connect(cb) {
         // If you aren't familiar with environment variables then
         // you can hard code `environment.ws_url` as `http://localhost:5000`
         this.socket = io('http://localhost:3030');
@@ -22,14 +22,20 @@ export class WebsocketService {
         })
 
         this.socket.on('message', (data) => {
-            console.log(data);
+            this.socket.emit('restarting');
+            cb(null, data);
         })
 
         this.socket.on('error', error => {
-            console.error(error)
+            console.error(error);
+            cb(error, null);            
         })
         this.socket.on('disconnect', () => {
             console.log('closed socket');
         })
+    }
+
+    disconnect() {
+        this.socket.close();
     }
 }

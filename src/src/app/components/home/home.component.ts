@@ -100,8 +100,20 @@ export class HomeComponent implements OnInit {
   connect() {
     if (!this.connectGoogle) {
       this.connectGoogle = true;
+
       this.recognition.abort()
-      this.webSocket.connect();
+
+      this.webSocket.connect((err, mess) => {
+        if (err) {
+          this.webSocket.disconnect();
+        } else {
+          this.sendWitAi(mess);
+        }
+      });
+    } else {
+      this.connectGoogle = false;
+      this.webSocket.disconnect();
+      this.start();
     }
   }
 

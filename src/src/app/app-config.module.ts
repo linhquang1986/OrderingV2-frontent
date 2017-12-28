@@ -7,7 +7,7 @@ export class AppConfig {
 }
 
 export const APP_DI_CONFIG: AppConfig = {
-    apiEndpoint: 'http://localhost:5000'
+    apiEndpoint: 'http://10.100.0.225:5000'
 };
 
 @NgModule({
