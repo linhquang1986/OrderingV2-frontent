@@ -11,15 +11,16 @@ declare var responsiveVoice: any;
 export class HandleResultWitAi {
     userSubmit: boolean;
     noteBill: boolean;
+    confirmOrder: boolean;
     constructor(
         private ngRedux: NgRedux<AppState>,
         private broadcaster: Broadcaster
     ) {
-        this.userSubmit = this.ngRedux.getState().userSubmit;
+        this.userSubmit = false;
         this.noteBill = this.ngRedux.getState().noteBill;
+        this.confirmOrder = false;
 
         this.ngRedux.subscribe(() => {
-            this.userSubmit = this.ngRedux.getState().userSubmit;
             this.noteBill = this.ngRedux.getState().noteBill;
         })
     }
@@ -34,41 +35,53 @@ export class HandleResultWitAi {
         }
         // kiem tra thuoc hanh dong nao?
         if (entities._add) {
-            type_action = "add"
+            type_action = "add";
         }
         if (entities._special && entities.question) {
-            type_action = "list_special"
+            type_action = "list_special";
         }
-        else if (entities._remove) {
-            type_action = "xoa"
+        if (entities._remove) {
+            type_action = "xoa";
+        }
+        if (type_action == null && entities.menus) {
+            type_action = 'chooseMenu';
+        }
+        if (entities._have) {
+            if (entities.menus)
+                type_action = 'chooseMenu';
+            if (entities._drink)
+                type_action = "add";
         }
         else {
             type_action = entities.option ? entities.option[0].value : 'add';
         }
-
-        switch (type_action) {
-            case "add":
-                this.handleOrder(entities);
-                break;
-            // case "xoa":
-            //     changeOrder(entities)
-            //     break;
-            case "no": // tu choi 1 hanh dong
-                if (this.userSubmit) {
-                    this.order();
-                }
-                //console.log('du roi', type_action);
-                //showBillAndNote()//show bill and hoi chu thich gi them khong?
-                break;
-            case "có":
-                if (this.userSubmit) {
-                    this.setState('setNoteBill', true);
-                }
-                break;
-            case "list_special":
-                this.showListSpecial();
-                break;
-        }
+        if (!this.ngRedux.getState().noteBill)
+            switch (type_action) {
+                case "add":
+                    this.handleOrder(entities);
+                    break;
+                // case "xoa":
+                //     changeOrder(entities)
+                //     break;
+                case "no": // tu choi 1 hanh dong
+                    if (this.userSubmit || this.confirmOrder) {
+                        this.order();
+                    }
+                    //console.log('du roi', type_action);
+                    //showBillAndNote()//show bill and hoi chu thich gi them khong?
+                    break;
+                case "có":
+                    if (this.userSubmit) {
+                        this.setState('setNoteBill', true);
+                    }
+                    break;
+                case "list_special":
+                    this.showListSpecial();
+                    break;
+                case "chooseMenu":
+                    this.handleMenu(entities.menus[0].value);
+                    break;
+            }
     }
 
     // quesDrink(entities) {
@@ -77,16 +90,14 @@ export class HandleResultWitAi {
     // }
 
     handleMenu(menu) {
-        console.log(this.ngRedux.getState())
-        console.log(menu)
-        // let exist = menuDrink.find(m => {
-        //     return m.name.toLowerCase() == menu.toLowerCase();
-        // })
-        // if (exist) {
-        //     speak('Bạn muốn dùng loại ' + menu + ' nào?')
-        // } else {
-        //     speak('Hiện bên mình chưa có bạn vui lòng chọn nước khác nha.')
-        // }
+        let exist = this.ngRedux.getState().menus.find(m => {
+            return m.name.toLowerCase() == menu.toLowerCase();
+        })
+        if (exist) {
+            this.speak('Bạn muốn dùng loại ' + menu + ' nào?')
+        } else {
+            this.speak('Hiện bên mình chưa có bạn vui lòng chọn nước khác nha.')
+        }
     }
 
     speak(text) {
@@ -128,5 +139,7 @@ export class HandleResultWitAi {
     order() {
         this.speak(message.order)
         this.setState('clearCart', null);
+        this.confirmOrder = false;
+        this.userSubmit = false;
     }
 }

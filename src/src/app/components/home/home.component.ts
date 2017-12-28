@@ -6,6 +6,7 @@ import { AppState } from '../../reduxStore/initStore';
 import { NgRedux } from 'ng2-redux';
 import { Broadcaster } from '../../shared/myEmittor.service';
 import { WebsocketService } from '../../shared/webSocket.service';
+import mess from '../../models/message';
 
 const { webkitSpeechRecognition }: IWindow = <IWindow>window;
 
@@ -30,8 +31,10 @@ export class HomeComponent implements OnInit {
   start() {
     let that = this;
     try {
-      if (this.recognition)
+      if (this.recognition) {
+        this.recognition.abort();
         this.recognition = null;
+      }
       this.recognition = new webkitSpeechRecognition();
       this.recognition.lang = 'vi-VN';
       this.recognition.interimResults = false;
@@ -41,10 +44,10 @@ export class HomeComponent implements OnInit {
       this.recognition.onresult = function (event) {
         let text = event.results[0][0].transcript;
         console.log(text)
-        if (!that.ngRedux.getState().noteBill)
-          that.sendWitAi(text)
-        else
+        if (that.ngRedux.getState().noteBill)
           that.addNoteBill(text)
+        that.sendWitAi(text)
+
         // if (!noteBill) {
         //   //userChat(text);
         //   //sendWitAi(text)
@@ -107,7 +110,7 @@ export class HomeComponent implements OnInit {
         if (err) {
           this.webSocket.disconnect();
         } else {
-	  console.log(mess)
+          console.log(mess)
           this.sendWitAi(mess);
         }
       });
@@ -119,11 +122,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.start();
     this.connectGoogle = false;
+    this.start();
+
     this.broadcaster.on<any>('userChat').subscribe(value => {
-      this.sendWitAi(value);
-    })
+      if (this.ngRedux.getState().noteBill)
+        this.addNoteBill(value)
+      this.sendWitAi(value)
+    });
+    
+    setTimeout(() => {
+      this.handleRsWit.speak(mess.welcome);
+    }, 500);
   }
 
 }

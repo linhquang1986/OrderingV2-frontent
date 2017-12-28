@@ -1,9 +1,11 @@
 //import { Drink } from './models/drink'
 import { CartItem } from '../models/cartItem';
 import * as _ from 'lodash';
-import { AppState } from './initStore'
+import { AppState } from './initStore';
+declare var responsiveVoice: any;
 
 function addCart(state, value, cb) {
+    let strRs = '';
     let exist = _.find(state.cart, c => {
         return c.drink._id === value._id
     })
@@ -13,16 +15,22 @@ function addCart(state, value, cb) {
         _c.price = parseInt(value.price);
         _c.quanlity = parseInt(value.quanlity ? value.quanlity : 1);
         state.cart.push(_c);
-        cb(state)
+        strRs = 'đã ghi nhận ' + _c.quanlity + ' ' + _c.drink.name;
     } else {
         _.find(state.cart, c => {
             if (c.drink._id === value._id) {
                 c.quanlity += parseInt(value.quanlity ? value.quanlity : 1);
                 c.price = c.drink.price * c.quanlity;
+                strRs = 'đã ghi nhận ' + c.quanlity + ' ' + c.drink.name;
             }
         })
-        cb(state)
     }
+    cb(state);
+    speak(strRs);
+}
+
+function speak(strRs) {
+    responsiveVoice.speak(strRs, "Vietnamese Male");
 }
 
 export function rootReducer(state: AppState, action): AppState {
@@ -37,13 +45,8 @@ export function rootReducer(state: AppState, action): AppState {
 
         case 'clearCart':
             state.cart = [];
-            state.userSubmit = false;
             state.noteText = [];
             state.noteBill = false;
-            return state;
-
-        case 'setUserSubmit':
-            state.userSubmit = action.data;
             return state;
 
         case 'initDrinks':

@@ -15,14 +15,14 @@ import message from '../../models/message';
 export class CartComponent implements OnInit {
     cart: CartItem[];
     noteText = [];
-    userSubmit: boolean;
+    watting;
+
     constructor(
         private ngRedux: NgRedux<AppState>,
         private AI: HandleResultWitAi
     ) {
         this.cart = this.ngRedux.getState().cart;
         this.noteText = this.ngRedux.getState().noteText;
-        this.userSubmit = this.ngRedux.getState().userSubmit;        
     }
 
     removeDrink(id) {
@@ -31,10 +31,21 @@ export class CartComponent implements OnInit {
 
     ngOnInit() {
         this.ngRedux.subscribe(() => {
-            this.userSubmit = this.ngRedux.getState().userSubmit;
             this.cart = this.ngRedux.getState().cart;
             this.noteText = this.ngRedux.getState().noteText;
+            if (this.cart.length > 0) {
+                this.AI.confirmOrder = true;
+                clearTimeout(this.watting);
+                this.watting = this.wattingOrder();
+            }
         })
+    }
+
+    wattingOrder() {
+        let that = this;
+        return setTimeout(() => {
+            that.AI.speak(message.confirm);
+        }, 5000);
     }
 
     setState(type, value) {
@@ -42,11 +53,12 @@ export class CartComponent implements OnInit {
     }
 
     submit() {
+        clearTimeout(this.watting);
         if (this.noteText.length > 0) {
             this.AI.order();
             this.noteText = []
         } else {
-            this.setState('setUserSubmit', true);
+            this.AI.userSubmit = true;
             this.AI.speak(message.note);
         }
     }
