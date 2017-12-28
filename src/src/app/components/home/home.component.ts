@@ -107,6 +107,7 @@ export class HomeComponent implements OnInit {
         if (err) {
           this.webSocket.disconnect();
         } else {
+	  console.log(mess)
           this.sendWitAi(mess);
         }
       });
