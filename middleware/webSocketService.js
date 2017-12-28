@@ -16,7 +16,8 @@ exports.startSocket = (server) => {
         })
         client.on('restarting', () => {
             console.log('Start another stream');
-            gstreams.end();
+	    if(gstreams)
+            	gstreams.end();
             gstreams = speech.startGoogleSpeechStream(client);
         })
         client.on('disconnect', () => {
