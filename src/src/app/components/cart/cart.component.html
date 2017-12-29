@@ -1,6 +1,6 @@
 <div class="panel panel-default text-center" [hidden]="cart.length == 0">
     <div class="panel-heading" data-toggle="collapse" data-target="#order-body">Bill</div>
-    <div class="collapse" id="order-body">
+    <div>
         <div class="panel-body">
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let item of cart">{{item.quanlity + ' ' + item.drink.name + ' ' + item.price + 'VND'}}

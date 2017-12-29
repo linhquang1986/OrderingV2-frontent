@@ -21,34 +21,42 @@ export class MenuComponent implements OnInit {
 
     ngOnInit() {
         let that = this;
-        this.menuService.getAllMenu().then(data => {
-            data.forEach(d => {
-                let row = {} as Menu;
-                row._id = d._id;
-                row.name = d.name;
-                row.best = d.best;
-                row.expressions = d.expressions;
-                row.drinks = [];
-                that.menus.push(row)
-            })
-        })
-
-        this.menuService.getAllDrink().then(data => {
-            data.forEach(d => {
-                let row = new Drink();
-                row._id = d._id;
-                row.name = d.name;
-                row.best = d.best;
-                row.expressions = d.expressions;
-                row.menu = d.menu;
-                row.price = d.price;
-                this.menus.forEach(m => {
-                    if (m._id == d.menu)
-                        m.drinks.push(row);
+        new Promise((resolve, reject) => {
+            try {
+                this.menuService.getAllMenu().then(data => {
+                    data.forEach(d => {
+                        let row = {} as Menu;
+                        row._id = d._id;
+                        row.name = d.name;
+                        row.best = d.best;
+                        row.expressions = d.expressions;
+                        row.drinks = [];
+                        that.menus.push(row)
+                    })
                 })
+                resolve(this.menus)
+            }
+            catch (err) {
+                reject(err)
+            }
+        }).then(() => {
+            this.menuService.getAllDrink().then(data => {
+                data.forEach(d => {
+                    let row = new Drink();
+                    row._id = d._id;
+                    row.name = d.name;
+                    row.best = d.best;
+                    row.expressions = d.expressions;
+                    row.menu = d.menu;
+                    row.price = d.price;
+                    this.menus.forEach(m => {
+                        if (m._id == d.menu)
+                            m.drinks.push(row);
+                    })
+                })
+                this.ngRedux.dispatch({ type: 'initMenus', data: this.menus });
+                this.ngRedux.dispatch({ type: 'initDrinks', data: data });
             })
-            this.ngRedux.dispatch({ type: 'initMenus', data: this.menus });
-            this.ngRedux.dispatch({ type: 'initDrinks', data: data });
         })
     }
 }

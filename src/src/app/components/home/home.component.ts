@@ -98,6 +98,7 @@ export class HomeComponent implements OnInit {
 
   addNoteBill(text) {
     this.ngRedux.dispatch({ type: 'addNoteText', data: text });
+    this.broadcaster.broadcast('clearWaitingNote');
   }
 
   connect() {
@@ -111,6 +112,8 @@ export class HomeComponent implements OnInit {
           this.webSocket.disconnect();
         } else {
           console.log(mess)
+          if (this.ngRedux.getState().noteBill)
+            this.addNoteBill(mess)
           this.sendWitAi(mess);
         }
       });
@@ -130,7 +133,7 @@ export class HomeComponent implements OnInit {
         this.addNoteBill(value)
       this.sendWitAi(value)
     });
-    
+
     setTimeout(() => {
       this.handleRsWit.speak(mess.welcome);
     }, 500);

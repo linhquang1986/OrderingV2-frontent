@@ -5,8 +5,16 @@ import * as io from 'socket.io-client';
 export class WebsocketService {
     // Our socket connection
     private socket;
+    intervol: any;
 
-    constructor() { 
+    constructor() {
+    }
+
+    resetSpeed() {
+        this.intervol = setInterval(() => {
+            this.socket.emit('restarting');
+            this.resetSpeed();
+        }, 20000);
     }
 
     connect(cb) {
@@ -22,13 +30,12 @@ export class WebsocketService {
         })
 
         this.socket.on('message', (data) => {
-            this.socket.emit('restarting');
             cb(null, data);
         })
 
         this.socket.on('error', error => {
             console.error(error);
-            cb(error, null);            
+            cb(error, null);
         })
         this.socket.on('disconnect', () => {
             console.log('closed socket');
@@ -37,5 +44,6 @@ export class WebsocketService {
 
     disconnect() {
         this.socket.close();
+        clearInterval(this.intervol);
     }
 }

@@ -43,7 +43,7 @@ export class DrinkDirective {
 
         this.broadcaster.on<any>('flickerAccess').subscribe(value => {
             if (value.id === this.drink._id) {
-                this.flickerAccess();
+                this.renderer.setElementClass(this.nativeElement, 'special_drink', true);
             }
         }, err => {
             console.log(err)

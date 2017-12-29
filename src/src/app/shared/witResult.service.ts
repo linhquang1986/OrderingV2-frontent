@@ -80,6 +80,7 @@ export class HandleResultWitAi {
                 case "có":
                     if (this.userSubmit) {
                         this.setState('setNoteBill', true);
+                        this.broadcaster.broadcast('clearWaiting');                        
                     }
                     break;
                 case "list_special":
@@ -137,6 +138,7 @@ export class HandleResultWitAi {
     }
 
     showListSpecial() {
+        this.speak(message.nofifySpecial);
         let drinks = this.ngRedux.getState().drinks;
         _.find(drinks, d => {
             if (d.best)

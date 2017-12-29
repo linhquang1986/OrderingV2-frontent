@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
     cart: CartItem[];
     noteText = [];
     watting;
+    waitingnote;
 
     constructor(
         private ngRedux: NgRedux<AppState>,
@@ -35,7 +36,7 @@ export class CartComponent implements OnInit {
         this.ngRedux.subscribe(() => {
             this.cart = this.ngRedux.getState().cart;
             this.noteText = this.ngRedux.getState().noteText;
-            if (this.cart.length > 0) {
+            if (this.cart.length > 0 && !this.AI.noteBill) {
                 this.AI.confirmOrder = true;
                 clearTimeout(this.watting);
                 this.watting = this.wattingOrder();
@@ -45,6 +46,10 @@ export class CartComponent implements OnInit {
         this.broadcaster.on<any>('clearWaiting').subscribe(() => {
             clearTimeout(this.watting);
         })
+
+        this.broadcaster.on<any>('clearWaitingNote').subscribe(() => {
+            clearTimeout(this.waitingnote);
+        })
     }
 
     wattingOrder() {
@@ -52,6 +57,13 @@ export class CartComponent implements OnInit {
         return setTimeout(() => {
             that.AI.speak(message.confirm);
         }, 5000);
+    }
+
+    waitingNote() {
+        let that = this;
+        return setTimeout(() => {
+            that.AI.order();
+        }, 10000)
     }
 
     setState(type, value) {
@@ -64,8 +76,9 @@ export class CartComponent implements OnInit {
             this.AI.order();
             this.noteText = []
         } else {
-            this.AI.userSubmit = true;
-            this.AI.speak(message.note);
+            this.AI.speak(message.notifyNote);
+            this.setState('setNoteBill', true);
+            this.waitingnote = this.waitingNote();
         }
     }
 }
