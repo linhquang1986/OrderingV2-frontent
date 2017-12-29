@@ -52,10 +52,11 @@ export class HandleResultWitAi {
             if (entities._drink)
                 type_action = "add";
         }
-        else {
-            type_action = entities.option ? entities.option[0].value : 'add';
+        if (type_action == null) {
+            if (entities.option)
+                type_action = entities.option[0].value;
         }
-        if (!this.ngRedux.getState().noteBill)
+        if (!this.ngRedux.getState().noteBill) {
             switch (type_action) {
                 case "add":
                     this.handleOrder(entities);
@@ -64,8 +65,14 @@ export class HandleResultWitAi {
                 //     changeOrder(entities)
                 //     break;
                 case "no": // tu choi 1 hanh dong
-                    if (this.userSubmit || this.confirmOrder) {
+                    if (this.userSubmit) {
                         this.order();
+                    }
+                    if(this.confirmOrder) {
+                        this.confirmOrder = false;
+                        this.userSubmit = true;
+                        this.broadcaster.broadcast('clearWaiting');
+                        this.speak(message.note);
                     }
                     //console.log('du roi', type_action);
                     //showBillAndNote()//show bill and hoi chu thich gi them khong?
@@ -81,7 +88,9 @@ export class HandleResultWitAi {
                 case "chooseMenu":
                     this.handleMenu(entities.menus[0].value);
                     break;
+                default: this.handleOrder(entities);
             }
+        }
     }
 
     // quesDrink(entities) {
@@ -121,6 +130,9 @@ export class HandleResultWitAi {
             }
             else
                 this.speak(message.outofdrink);
+        }
+        else {
+            this.speak(message.outofdrink);
         }
     }
 

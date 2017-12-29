@@ -4,6 +4,7 @@ import { CartItem } from '../../models/cartItem';
 import { NgRedux } from 'ng2-redux';
 import { AppState } from '../../reduxStore/initStore';
 import { HandleResultWitAi } from '../../shared/witResult.service';
+import { Broadcaster } from '../../shared/myEmittor.service';
 import message from '../../models/message';
 
 @Component({
@@ -19,7 +20,8 @@ export class CartComponent implements OnInit {
 
     constructor(
         private ngRedux: NgRedux<AppState>,
-        private AI: HandleResultWitAi
+        private AI: HandleResultWitAi,
+        private broadcaster: Broadcaster
     ) {
         this.cart = this.ngRedux.getState().cart;
         this.noteText = this.ngRedux.getState().noteText;
@@ -38,6 +40,10 @@ export class CartComponent implements OnInit {
                 clearTimeout(this.watting);
                 this.watting = this.wattingOrder();
             }
+        })
+
+        this.broadcaster.on<any>('clearWaiting').subscribe(() => {
+            clearTimeout(this.watting);
         })
     }
 
