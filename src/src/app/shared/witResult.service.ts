@@ -153,6 +153,7 @@ export class HandleResultWitAi {
     order() {
         this.speak(message.order)
         this.setState('clearCart', null);
+        this.broadcaster.broadcast('clearNote');
         this.confirmOrder = false;
         this.userSubmit = false;
     }

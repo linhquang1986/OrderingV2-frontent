@@ -41,15 +41,20 @@ export class CartComponent implements OnInit {
                 clearTimeout(this.watting);
                 this.watting = this.wattingOrder();
             }
-        })
+        });
 
         this.broadcaster.on<any>('clearWaiting').subscribe(() => {
             clearTimeout(this.watting);
-        })
+        });
 
         this.broadcaster.on<any>('clearWaitingNote').subscribe(() => {
             clearTimeout(this.waitingnote);
-        })
+            this.waitingNote();
+        });
+
+        this.broadcaster.on<any>('clearNote').subscribe(() => {
+            clearTimeout(this.waitingnote);
+        });
     }
 
     wattingOrder() {
